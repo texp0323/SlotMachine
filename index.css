@@ -17,6 +17,10 @@ body {
     align-items: center; /* 중앙 정렬 */
 }
 
+.mobile{
+    flex-direction: column;
+}
+
 .container {
     text-align: center;
     background-color: rgba(44, 44, 44, 0.9);
@@ -29,7 +33,7 @@ body {
 .volume-controls {
     display: flex;
     flex-direction: column; /* 각 항목을 세로로 나열 */
-    margin-left: 10px; /* 간격 조절 */
+    margin-top: 30px; /* 여백 추가 */
 }
 
 .volume-control {

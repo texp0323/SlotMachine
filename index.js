@@ -21,18 +21,22 @@ var bgmVolume = 1;
 let sfxVolume = 1;
 let toggleSFX = false;
 
+function detectMobileDevice() {
+    const minWidth = 700;
+  
+    return window.innerWidth <= minWidth;
+  }
+  
+  const isMobile = detectMobileDevice();
+
 // 페이지 로드 시 랜덤 심볼로 리엘 채우기
 window.onload = () => {
-
+    if (isMobile) {
+        document.body.querySelector('.main').classList.add('mobile');
+    }
     fillReels();
     loadUserSetting();
     bgm.loop = true;
-};
-
-window.onunload = function() {
-    localStorage.setItem('bgmVolume', bgmVolume);
-    localStorage.setItem('sfxVolume', sfxVolume);
-    localStorage.setItem('coins', coins);
 };
 
 function loadUserSetting(){
@@ -86,10 +90,12 @@ sfxToggle.addEventListener('click', ()=>{
 
 bgmVolumeControl.addEventListener('input', () => {
     bgmVolume = bgmVolumeControl.value;
+    localStorage.setItem('bgmVolume', bgmVolume);
     bgm.volume = bgmVolume;
 });
 sfxVolumeControl.addEventListener('input', () => {
     sfxVolume = sfxVolumeControl.value;
+    localStorage.setItem('sfxVolume', sfxVolume);
     reelSFX.volume = sfxVolume;
 });
 
@@ -208,7 +214,7 @@ function createFallingMoney() {
 function checkResult(symbol1, symbol2, symbol3) {
     if (symbol1 === symbol2 && symbol2 === symbol3) {
         resultDiv.textContent = "축하합니다! 잭팟!";
-        if(sfxToggle){
+        if(toggleSFX){
             var jackpotCoinSFX = new Audio('audio/jackpot.mp3');
             var jackpotViolinSFX = new Audio('audio/jackpot-violin.mp3');
             jackpotCoinSFX.volume = sfxVolume * 0.5;
@@ -242,4 +248,5 @@ function checkResult(symbol1, symbol2, symbol3) {
 
 function updateCoinDisplay() {
     coinCountElement.textContent = coins; // 코인 수 업데이트
+    localStorage.setItem('coins', coins);
 }
