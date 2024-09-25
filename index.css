@@ -1,0 +1,228 @@
+/* 기본 스타일 (다크 모드) */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #1e1e1e;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+}
+
+.main {
+    display: flex; /* 수평으로 배치 */
+    align-items: center; /* 중앙 정렬 */
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(44, 44, 44, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    width: 300px;
+}
+
+.volume-controls {
+    display: flex;
+    flex-direction: column; /* 각 항목을 세로로 나열 */
+    margin-left: 10px; /* 간격 조절 */
+}
+
+.volume-control {
+    display: flex; /* 각 항목을 가로로 나열 */
+    align-items: center; /* 중앙 정렬 */
+    margin-bottom: 10px; /* 여백 추가 */
+
+    #sfxToggle{
+        margin-left: 20px;
+    }
+}
+
+.volumeText {
+    margin-right: 10px; /* 텍스트와 체크박스 사이 여백 */
+}
+
+.roll-button {
+    background-color: #007bff; /* 버튼 배경색 */
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: white; /* 버튼 텍스트 색상 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 버튼 둥근 모서리 */
+    padding: 12px 25px; /* 버튼 패딩 */
+    font-size: 18px; /* 버튼 폰트 크기 */
+    cursor: pointer; /* 포인터 커서 */
+    transition: background-color 0.3s ease, transform 0.2s; /* 배경색 전환 및 크기 변화 효과 */
+    &:hover {
+        background-color: #00a6ff; /* 호버 시 색상 */
+        transform: scale(1.05); /* 호버 시 크기 확대 */
+    }
+    &:disabled {
+        background-color: #555; /* 비활성화된 버튼 색상 */
+        cursor: not-allowed;
+    }
+}
+
+.coinDisplay {
+    font-size: 24px; /* 코인 표시 텍스트 크기 */
+    color: #ffffff; /* 텍스트 색상 */
+    margin-bottom: 20px; /* 여백 추가 */
+}
+
+.result {
+    margin-top: 20px; /* 결과 영역 여백 */
+    font-size: 20px; /* 결과 텍스트 크기 */
+    color: #ffffff; /* 결과 텍스트 색상 */
+    font-weight: bold; /* 결과 텍스트 두껍게 */
+}
+
+/* 화이트 모드 스타일 */
+body.white-mode {
+    background-color: #f0f0f0; /* 조금 더 부드러운 배경색 */
+}
+
+.container.white-mode {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.volumeText {
+    color: #ffffff; /* 검은색 텍스트 */
+    margin-left: 20px;
+}
+
+/* 화이트 모드 토글 */
+#toggleButton {
+    background-color: transparent; /* 배경색 제거 */
+    border: none; /* 테두리 없음 */
+    cursor: pointer; /* 포인터 커서 */
+    font-size: 24px; /* 이모지 크기 조정 */
+    position: absolute; /* 절대 위치 지정 */
+    top: 10px; /* 상단 여백 */
+    right: 10px; /* 오른쪽 여백 */
+}
+
+/* 여백을 통일성 있게 설정 */
+#coinDisplay, #result {
+    font-size: 20px;
+    color: #ffffff;
+    margin: 10px 0; /* 여백을 통일성 있게 */
+}
+
+/* 화이트 모드 스타일 통합 */
+.white-mode {
+    color: #000000; /* 검은색 텍스트 */
+}
+
+.toggle {
+    margin: 10px; /* 체크박스 주변 여백 통일 */
+}
+
+
+/* 슬롯 머신 */
+.slot-machine {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.reel {
+    width: 70px;
+    height: 100px;
+    border: 3px solid #ababab; /* 경계 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, rgb(139, 137, 146) 0%, #dfdfdf 20%, #ffffff 40%, #ffffff 60%, #dfdfdf 80%, rgb(139, 137, 146) 100%);
+    font-size: 36px; /* 텍스트 크기 */
+    color: #ffffff; /* 텍스트 색상 */
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* 내부 그림자 효과 */
+}
+
+.symbol {
+    position: absolute;
+    width: 100%; /* 슬롯 크기와 동일하게 */
+    height: 100%; /* 슬롯 크기와 동일하게 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px; /* 텍스트 크기 */
+    color: #ffffff; /* 텍스트 색상 */
+    opacity: 1; /* 초기 불투명도 */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* 변환과 불투명도 변화에 대한 전환 효과 */
+    will-change: transform, opacity; /* 성능 최적화 */
+}
+
+.spin {
+    animation: spinAnimation 0.1s infinite; /* 애니메이션 추가 */
+}
+
+@keyframes spinAnimation {
+    0% {
+        transform: translateY(0);/* 시작 위치 */
+        opacity: 1;
+    }
+    30% {
+        transform: translateY(30px); /* 아래로 더 많이 내려감 */
+    }
+    40%{
+        opacity: 0;
+    }
+    60%{
+        opacity: 0;
+    }
+    70% {
+        transform: translateY(-30px); /* 위로 더 많이 올라감 */
+    }
+    100% {
+        transform: translateY(0); /* 원래 위치로 돌아옴 */
+        opacity: 1;
+    }
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+.money {
+    position: absolute;
+    font-size: 72px; /* 이모지 크기 조정 */
+    animation: fall 3s forwards; /* 3초 동안 떨어짐 */
+    pointer-events: none; /* 이모지 클릭 방지 */
+}
+
+@keyframes jackpotAnimation {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.5) rotate(360deg);
+    }
+    80% {
+        transform: scale(1.6) rotate(360deg);
+    }
+    90% {
+        transform: scale(0.9) rotate(360deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+.symbol.jackpot {
+    animation: jackpotAnimation 1s forwards; /* 애니메이션 적용 */
+}
