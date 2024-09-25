@@ -100,6 +100,7 @@ sfxVolumeControl.addEventListener('input', () => {
 });
 
 spinButton.addEventListener('click', () => {
+    coins = localStorage.getItem('coins');
     if (coins <= 0) {
         resultDiv.innerHTML = "코인이 부족합니다! <br>새로고침 시 무료 50코인 지급";
         return; // 코인이 없으면 스핀하지 않음
